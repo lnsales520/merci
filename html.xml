@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tout est prêt ! | Accès Membres</title>
+    <meta name="description" content="Merci de nous avoir rejoints. Vous recevrez bientôt l'accès à l'espace membre.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-1: #4f46e5;
+            --accent-2: #ec4899;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Animations */
+        .background-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s infinite ease-in-out alternate;
+            transition: transform 0.5s ease-out;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-1);
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-2);
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: #8b5cf6;
+            top: 40%;
+            left: 40%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* Container & Glassmorphism */
+        .container {
+            width: 100%;
+            max-width: 520px;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 48px 36px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Icons */
+        .success-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .success-icon {
+            width: 48px;
+            height: 48px;
+        }
+
+        .success-icon circle {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: drawCircle 1s ease-out 0.3s forwards;
+        }
+
+        .success-icon .check-path {
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: drawCheck 0.5s ease-out 1s forwards;
+        }
+
+        @keyframes drawCircle {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Typography */
+        .title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .description strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Button */
+        .action-btn {
+            background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.5);
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .glass-card {
+                padding: 36px 24px;
+            }
+            .title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    
+    <main class="container">
+        <div class="glass-card">
+            <div class="success-icon-wrapper">
+                <svg class="success-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+                    <path class="check-path" d="M8 12.5L10.5 15L16 9" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#4F46E5" />
+                            <stop offset="1" stop-color="#EC4899" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            
+            <h1 class="title">Tout est prêt !</h1>
+            
+            <div class="message-box">
+                <p class="subtitle">Merci de nous avoir rejoints !</p>
+                <p class="description">
+                    Votre inscription a été traitée avec succès. Dans les prochaines minutes, nous vous <strong>enverrons un e-mail</strong> avec vos identifiants d'accès exclusifs pour l'espace membre.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <div class="info-item">
+                    <span class="info-icon">📧</span>
+                    <span>Vérifiez votre boîte de réception ou le dossier spam au cas où.</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🚀</span>
+                    <span>Préparez-vous à vivre une excellente expérience d'apprentissage !</span>
+                </div>
+            </div>
+            
+            <button class="action-btn" onclick="window.open('https://mail.google.com', '_blank')">Aller à ma messagerie</button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Parallax effect for the background orbs to make it feel alive
+            const orbs = document.querySelectorAll('.orb');
+            
+            // Only apply the effect on devices with mouse/pointer
+            if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                document.addEventListener('mousemove', (e) => {
+                    const centerX = window.innerWidth / 2;
+                    const centerY = window.innerHeight / 2;
+                    
+                    // Calculate distance from center (-1 to 1)
+                    const mouseX = (e.clientX - centerX) / centerX;
+                    const mouseY = (e.clientY - centerY) / centerY;
+                    
+                    orbs.forEach((orb, index) => {
+                        // Different speed for each orb creates depth
+                        const depth = (index + 1) * 30;
+                        
+                        // Move orbs opposite to mouse direction
+                        const moveX = mouseX * depth * -1;
+                        const moveY = mouseY * depth * -1;
+                        
+                        orb.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                    });
+                });
+
+                // Reset positions when mouse leaves the document
+                document.addEventListener('mouseleave', () => {
+                    orbs.forEach(orb => {
+                        orb.style.transform = `translate(0, 0)`;
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
